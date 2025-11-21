@@ -1,14 +1,14 @@
-"use client";
+'use client';
 
-import Link from "next/link";
-import { useState, useEffect } from "react";
-import { usePathname } from "next/navigation";
-import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
-import { ThemeToggle } from "@/components/layout/theme-toggle";
-import { Menu, X } from "lucide-react";
-import { SITE_DASHBOARD, SITE_NAME } from "@/global/constant";
-import Image from "next/image";
+import Link from 'next/link';
+import { useState, useEffect } from 'react';
+import { usePathname } from 'next/navigation';
+import { cn } from '@/lib/utils';
+import { Button } from '@/components/ui/button';
+import { ThemeToggle } from '@/components/layout/theme-toggle';
+import { Menu, X } from 'lucide-react';
+import { SITE_DASHBOARD, SITE_NAME } from '@/global/constant';
+import Image from 'next/image';
 
 interface NavItem {
   label: string;
@@ -17,24 +17,24 @@ interface NavItem {
 
 const navItems: NavItem[] = [
   {
-    label: "Home",
-    href: "/",
+    label: 'Home',
+    href: '/',
   },
   {
-    label: "About",
-    href: "/about",
+    label: 'About',
+    href: '/about',
   },
   {
-    label: "Tools",
-    href: "/tools",
+    label: 'Tools',
+    href: '/tools',
   },
   // {
   //   label: 'Pricing',
   //   href: '/pricing',
   // },
   {
-    label: "Contact",
-    href: "/contact",
+    label: 'Contact',
+    href: '/contact',
   },
 ];
 
@@ -53,17 +53,17 @@ export function Navbar() {
       }
     };
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   return (
     <header
       className={cn(
-        "sticky top-0 z-40 w-full transition-all duration-200",
+        'sticky top-0 z-40 w-full transition-all duration-200',
         isScrolled
-          ? "bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b"
-          : "bg-transparent"
+          ? 'bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b'
+          : 'bg-transparent'
       )}
     >
       <div className="container flex h-16 items-center justify-between py-4">
@@ -88,18 +88,21 @@ export function Navbar() {
               key={item.href}
               href={item.href}
               className={cn(
-                "text-sm font-medium transition-colors hover:text-primary",
+                'text-sm font-medium transition-colors hover:text-primary',
                 pathname === item.href
-                  ? "text-primary"
-                  : "text-muted-foreground"
+                  ? 'text-primary'
+                  : 'text-muted-foreground'
               )}
             >
               {item.label}
             </Link>
           ))}
           <ThemeToggle />
+          <Link href={`${SITE_DASHBOARD}/register`} target="_blank">
+            <Button size="sm">Signup</Button>
+          </Link>
           <Link href={SITE_DASHBOARD} target="_blank">
-            <Button size="sm">Get Started</Button>
+            <Button size="sm">Login</Button>
           </Link>
         </nav>
 
@@ -127,19 +130,28 @@ export function Navbar() {
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  "block py-2 text-sm font-medium transition-colors hover:text-primary",
+                  'block py-2 text-sm font-medium transition-colors hover:text-primary',
                   pathname === item.href
-                    ? "text-primary"
-                    : "text-muted-foreground"
+                    ? 'text-primary'
+                    : 'text-muted-foreground'
                 )}
                 onClick={() => setIsOpen(false)}
               >
                 {item.label}
               </Link>
             ))}
-            <Button className="w-full" size="sm">
+            {/* <Button className="w-full" size="sm">
               Get Started
-            </Button>
+            </Button> */}
+
+            <div>
+              <Link href={`${SITE_DASHBOARD}/register`} target="_blank" className='block w-full'>
+                <Button size="sm" className='w-full'>Signup</Button>
+              </Link>
+              <Link href={SITE_DASHBOARD} target="_blank" className='block w-full mt-2'>
+                <Button size="sm" className='w-full'>Login</Button>
+              </Link>
+            </div>
           </div>
         </div>
       )}
